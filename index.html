@@ -1,51 +1,42 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>Chama Group</title>
-<style>
-body{
-font-family:Arial;
-padding:20px;
-background:#f4f4f4;
-}
+<h1>Intellects Chama Dashboard</h1>
 
-.card{
-background:white;
-padding:20px;
-margin:10px;
-border-radius:10px;
-display:inline-block;
-width:220px;
-}
+<div id="summary"></div>
 
-h1{
-color:#0b8f5a;
-}
-</style>
-</head>
-<body>
+<table border="1" cellpadding="10">
+<thead>
+<tr>
+<th>Member</th>
+<th>Savings</th>
+<th>Loan Limit (80%)</th>
+</tr>
+</thead>
 
-<h1>Chama Group Dashboard</h1>
+<tbody id="membersTable"></tbody>
+</table>
 
-<div class="card">
-<h3>Members</h3>
-<h2>6</h2>
-</div>
+<script src="data.js"></script>
 
-<div class="card">
-<h3>Total Contributions</h3>
-<h2>KES 0</h2>
-</div>
+<script>
 
-<div class="card">
-<h3>Outstanding Loans</h3>
-<h2>KES 0</h2>
-</div>
+let totalSavings = 0;
 
-<div class="card">
-<h3>Bank Balance</h3>
-<h2>KES 0</h2>
-</div>
+members.forEach(member => {
 
-</body>
-</html>
+totalSavings += member.savings;
+
+document.getElementById("membersTable").innerHTML += `
+<tr>
+<td>${member.name}</td>
+<td>KES ${member.savings.toLocaleString()}</td>
+<td>KES ${(member.savings*0.8).toLocaleString()}</td>
+</tr>
+`;
+
+});
+
+document.getElementById("summary").innerHTML = `
+<h2>Total Members: ${members.length}</h2>
+<h2>Total Contributions: KES ${totalSavings.toLocaleString()}</h2>
+`;
+
+</script>
